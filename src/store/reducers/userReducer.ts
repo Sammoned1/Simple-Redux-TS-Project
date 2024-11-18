@@ -1,6 +1,6 @@
 import { createReducer } from "@reduxjs/toolkit"
 import { UserState } from "../../types/userTypes"
-import { fetchUsers, fetchUsersError, fetchUsersSuccess } from "./actions/userActions"
+import { fetchUsersAction, fetchUsersSuccessAction, fetchUsersErrorAction } from "./actions/userActions"
 
 const initialState: UserState = {
   users: [],
@@ -10,13 +10,15 @@ const initialState: UserState = {
 
 export const userReducer = createReducer(initialState, (builder) => {
   builder
-    .addCase(fetchUsers, (state) => {
+    .addCase(fetchUsersAction, (state) => {
       state.loading = true
     })
-    .addCase(fetchUsersSuccess, (state, action) => {
+    .addCase(fetchUsersSuccessAction, (state, action) => {
       state.users = action.payload
+      state.loading = false
     })
-    .addCase(fetchUsersError, (state, action) => {
+    .addCase(fetchUsersErrorAction, (state, action) => {
       state.error = action.payload
+      state.loading = false
     })
 })
