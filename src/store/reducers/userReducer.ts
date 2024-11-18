@@ -21,4 +21,5 @@ export const userReducer = createReducer(initialState, (builder) => {
       state.error = action.payload
       state.loading = false
     })
+    .addDefaultCase((state) => state)
 })

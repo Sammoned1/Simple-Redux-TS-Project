@@ -1,15 +1,13 @@
 import React, { FC, useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { AppDispatch, RootState } from '../store';
-import { useDispatch } from 'react-redux';
-import { fetchUsers } from '../store/action-creators/user';
+import { RootState } from '../store';
+import { useActions } from '../hooks/useActions';
 
 const UserList: FC = () => {
   const {users, loading, error} = useSelector((state: RootState) => state.users)
-  const dispatch = useDispatch<AppDispatch>()
-
+  const {fetchUsers} = useActions()
   useEffect(() => {
-    dispatch(fetchUsers())
+    fetchUsers()
   }, [])
 
   if (loading){
